@@ -5,27 +5,53 @@ I'm no longer doing official GitHub releases so please use the download button t
 [![Download](https://github.com/mzomparelli/zVirtualDesktop/blob/master/download.png?raw=true)](https://github.com/mzomparelli/zVirtualDesktop/blob/master/zVirtualDesktop/bin/Release/zVirtualDesktop.zip?raw=true)
 [![Donate](https://github.com/mzomparelli/zVirtualDesktop/blob/master/Donate1.png?raw=true)](https://www.paypal.me/MichaelZomparelli/)
 
-__Installation__  
-This program uses `IsolatedStorage` for the settings file so in order for each new version to read the same settings file it is important that the program be unzipped and run from the same location everytime.
+[![Download](https://github.com/mzomparelli/zVirtualDesktop/blob/master/download.png?raw=true)](https://zomp.co/Files.aspx?id=zVD)  
+_  
+_  
+[100% CLEAN award granted by Softpedia](http://www.softpedia.com/get/Desktop-Enhancements/Other-Desktop-Enhancements/zVirtualDesktop.shtml#status)  
 
-It's preferable to run directly from the `Startup` folder
+_  
+# Features  
 
-You can get to the `Startup` folder by typing `Startup` into the address bar of any Windows Explorer window. Simply copy the file into that folder.
+# Hotkeys:  
 
-__Supported Versions__  
-I'm currently running this app perfectly on version:  
-Version 1607 (OS Build 14393.953)  
+Hotkeys are not limited to virtual desktops. You can choose any hotkey for any of the following actions  
+  
+- Disable Default (if you wanted to disable a built-in Windows default and do nothing instead)  
+- Keyboard Application Menu  
+- Toggle Auto-hide Taskbar  
+- Open a file, folder, or URL  
+- Copy  
+- Paste  
+- Toggle Desktop View (a Task View replacement)  
+- Toggle zVirtualDesktop Settings  
+- Show Window Menu (a handy window context menu)  
+- Navigate to Desktop  
+- Move Window to Desktop  
+- Move Window to Desktop & Follow  
+- Pin/Unpin Window  
+- Pin/Unpin Application  
+- Bring All Windows Here  
+- Remove Empty Desktops  
+- Close Foreground Window  
+- Minimize Foreground Window  
+- Toggle Foreground Window Top Most  
+- Multimedia - Play/Pause  
+- Multimedia - Next  
+- Multimedia - Previous  
+- Volume Up  
+- Volume Down  
+- Volume Mute  
+- Browser Back  
+- Browser Forward  
+- Browser Reload  
+- ClipboardEx Copy  
+- ClipboardEx Paste  
+- ClipboardEx Clone  
+- Send Keystroke  
+- Send Text Entry  
 
-If the app doesn't work for you then I would first try getting Windows Updates and if that doesn't work then please open an issue with your version.
-
-To find your version simply press <kbd>WIN</kbd>+<kbd>R</kbd> then type WinVer into the box and hit enter.
-
-
-__Features:__
-
-__Hotkeys:__
-
-These are the default hotkeys. You can configure these any way you'd like.
+Below are the default hotkeys for virtual desktops. You can configure these any way you'd like.
 
 __Navigate Desktops:__  
 <kbd>WIN</kbd>+<kbd>CTRL</kbd>+<kbd>Numpad</kbd>  
