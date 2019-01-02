@@ -1,16 +1,19 @@
+# NOTE
+This is a fork of the orginal [repo](https://github.com/mzomparelli/zVirtualDesktop) before it was made closed source. Change include fixing the GUID references, removing the update check and adding command line options. 
+
+This is mostly for personal usage and if you want to support the orginal deveoper please go to his site and download the most recent version from there. 
+
+## Orginal Readme details. 
+
 # zVirtualDesktop  
 Windows 10 Virtual Desktop Hotkeys and System Tray Icon  
 I'm no longer doing official GitHub releases so please use the download button to get the most recent version
 
 [![Download](https://github.com/mzomparelli/zVirtualDesktop/blob/master/download.png?raw=true)](https://github.com/mzomparelli/zVirtualDesktop/blob/master/zVirtualDesktop/bin/Release/zVirtualDesktop.zip?raw=true)
 [![Donate](https://github.com/mzomparelli/zVirtualDesktop/blob/master/Donate1.png?raw=true)](https://www.paypal.me/MichaelZomparelli/)
-
 [![Download](https://github.com/mzomparelli/zVirtualDesktop/blob/master/download.png?raw=true)](https://zomp.co/Files.aspx?id=zVD)  
-_  
-_  
 [100% CLEAN award granted by Softpedia](http://www.softpedia.com/get/Desktop-Enhancements/Other-Desktop-Enhancements/zVirtualDesktop.shtml#status)  
 
-_  
 # Features  
 
 # Hotkeys:  
