@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 namespace WindowsDesktop.Interop
 {
 	[ComImport]
-	[Guid("2c08adf0-a386-4b35-9250-0fe183476fcc")]
+    [Guid("2c08adf0-a386-4b35-9250-0fe183476fcc")]
 	[InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
 	public interface IApplicationViewCollection
 	{

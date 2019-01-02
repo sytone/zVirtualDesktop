@@ -16,12 +16,36 @@ namespace zVirtualDesktop
         /// The main entry point for the application.
         /// </summary>
         [STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
+
+            if(args.Length > 1)
+            {
+                if(args[0] == "intptr")
+                {
+                    Window win = new Window((IntPtr)Convert.ToInt32(args[1]));
+                    win.MoveToDesktop(Convert.ToInt32(args[2]));
+                    win.GoToDesktop();
+                }
+
+                if (args[0] == "title")
+                {
+                    Window.FindWindowMatch(args[1]);
+                    if ((int)Window.FoundWindowHandle != 0)
+                    {
+                        Window win = new Window(Window.FoundWindowHandle);
+                        win.MoveToDesktop(Convert.ToInt32(args[2]));
+                        win.GoToDesktop();
+                    }
+                }
+
+                Console.WriteLine("Found Handle: {0}", Window.FoundWindowHandle);
+                return;
+            }
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
 
-            CheckVersion();
+            //CheckVersion();
 
             //Add Excluded windows
             ExcludedWindowCaptions.Add("ASUS_Check");
@@ -78,29 +102,30 @@ namespace zVirtualDesktop
 
         public static void CheckVersion()
         {
-            try
-            {
-                MainForm.timerCheckVersion.Enabled = false;
-            }
-            catch { }
+            return;
+            //try
+            //{
+            //    MainForm.timerCheckVersion.Enabled = false;
+            //}
+            //catch { }
             
-            string latestversion = GetCurrentVersion();
-            if (latestversion != "" && latestversion != version)
-            {
-                DialogResult result = MessageBox.Show("zVirtualDesktop " + latestversion + " is available.\r\n" +
-                    "You are currently running version "+ version + "\r\n" + 
-                    "Would you like to download it now?", "zVirtualDesktop", MessageBoxButtons.YesNo);
-                if (result == DialogResult.Yes)
-                {
-                    System.Diagnostics.Process.Start("https://github.com/mzomparelli/zVirtualDesktop/blob/master/zVirtualDesktop/bin/Release/zVirtualDesktop.zip?raw=true");
-                    Environment.Exit(0);
-                }
-            }
-            try
-            {
-                MainForm.timerCheckVersion.Enabled = true;
-            }
-            catch { }
+            //string latestversion = GetCurrentVersion();
+            //if (latestversion != "" && latestversion != version)
+            //{
+            //    DialogResult result = MessageBox.Show("zVirtualDesktop " + latestversion + " is available.\r\n" +
+            //        "You are currently running version "+ version + "\r\n" + 
+            //        "Would you like to download it now?", "zVirtualDesktop", MessageBoxButtons.YesNo);
+            //    if (result == DialogResult.Yes)
+            //    {
+            //        System.Diagnostics.Process.Start("https://github.com/mzomparelli/zVirtualDesktop/blob/master/zVirtualDesktop/bin/Release/zVirtualDesktop.zip?raw=true");
+            //        Environment.Exit(0);
+            //    }
+            //}
+            //try
+            //{
+            //    MainForm.timerCheckVersion.Enabled = true;
+            //}
+            //catch { }
         }
 
         public static string GetCurrentVersion()

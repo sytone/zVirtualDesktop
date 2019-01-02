@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 namespace WindowsDesktop.Interop
 {
 	[ComImport]
-	[Guid("ef9f1a6c-d3cc-4358-b712-f84b635bebe7")]
+	[Guid("F31574D6-B682-4CDC-BD56-1827860ABEC6")]
 	[InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
 	internal interface IVirtualDesktopManagerInternal10130
 	{

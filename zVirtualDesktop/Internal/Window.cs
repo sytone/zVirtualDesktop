@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -22,11 +23,12 @@ namespace zVirtualDesktop
             {
                 Window win = new Window(GetForegroundWindow());
                 return win;
-            }catch
+            }
+            catch
             {
                 return null;
             }
-            
+
         }
 
         //Create a new instance from the taskbar window
@@ -69,7 +71,8 @@ namespace zVirtualDesktop
         }
 
         public string Caption
-        { get
+        {
+            get
             {
                 return GetWindowText();
             }
@@ -94,16 +97,17 @@ namespace zVirtualDesktop
                         return 1;
                     }
                     return GetDesktopNumber(VirtualDesktop.FromHwnd(hWnd).Id);
-                }catch(Exception ex)
+                }
+                catch (Exception ex)
                 {
-                    Log.LogEvent("Exception", 
-                                 "Handle: " + hWnd.ToString() + 
-                                 "\r\nCaption: " + this.Caption, 
-                                 "", 
+                    Log.LogEvent("Exception",
+                                 "Handle: " + hWnd.ToString() +
+                                 "\r\nCaption: " + this.Caption,
+                                 "",
                                  "Window", ex);
                     return 1;
                 }
-                
+
             }
         }
 
@@ -178,21 +182,22 @@ namespace zVirtualDesktop
             {
                 try
                 {
-                    if(hWnd != IntPtr.Zero)
+                    if (hWnd != IntPtr.Zero)
                     {
                         return VirtualDesktop.IsPinnedWindow(hWnd);
-                    }else
+                    }
+                    else
                     {
                         return false;
                     }
-                    
+
                 }
                 catch (Exception ex)
                 {
                     Log.LogEvent("Exception", "", "", "Window", ex);
                     return false;
                 }
-                
+
             }
         }
 
@@ -209,7 +214,7 @@ namespace zVirtualDesktop
                     else
                     {
                         return false;
-                    }                    
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -227,12 +232,13 @@ namespace zVirtualDesktop
                 try
                 {
                     return System.Diagnostics.Process.GetProcessById((int)GetProcessID());
-                }catch(Exception ex)
+                }
+                catch (Exception ex)
                 {
                     Log.LogEvent("Exception", "", "", "Window", ex);
                     return null;
                 }
-                
+
             }
         }
 
@@ -254,7 +260,7 @@ namespace zVirtualDesktop
                              "Window",
                              ex);
             }
-        } 
+        }
 
         public void UnpinApplication()
         {
@@ -347,7 +353,7 @@ namespace zVirtualDesktop
             {
                 MoveToDesktop(this.DesktopNumber + 1);
             }
-            
+
         }
 
         public void MoveToNextDesktop(bool follow)
@@ -360,7 +366,7 @@ namespace zVirtualDesktop
         {
             try
             {
-                if(Program.IsExcludedWindow(this.Caption))
+                if (Program.IsExcludedWindow(this.Caption))
                 {
                     return;
                 }
@@ -373,7 +379,7 @@ namespace zVirtualDesktop
                     {
                         VirtualDesktop.Create();
                     }
-                }             
+                }
 
                 VirtualDesktop current = VirtualDesktop.Current;
 
@@ -409,14 +415,14 @@ namespace zVirtualDesktop
             {
                 if (this.Caption != "")
                 {
-                    
+
                 }
-                
-                Log.LogEvent("Exception", "", 
-                             "Window Handle: " + this.Handle.ToString() + Environment.NewLine + 
-                             "Window Caption: " + this.Caption + Environment.NewLine + 
-                             "Application: " + this.ApplicationName, 
-                             "Window", 
+
+                Log.LogEvent("Exception", "",
+                             "Window Handle: " + this.Handle.ToString() + Environment.NewLine +
+                             "Window Caption: " + this.Caption + Environment.NewLine +
+                             "Application: " + this.ApplicationName,
+                             "Window",
                              ex);
             }
 
@@ -426,8 +432,8 @@ namespace zVirtualDesktop
         public void MoveToDesktop(int desktopNumber, bool follow)
         {
             MoveToDesktop(desktopNumber);
-            if(follow)
-            {                
+            if (follow)
+            {
                 GoToDesktop(desktopNumber);
             }
         }
@@ -499,12 +505,13 @@ namespace zVirtualDesktop
                 StringBuilder text = new StringBuilder(length + 1);
                 GetWindowText(hWnd, text, text.Capacity);
                 return text.ToString();
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 Log.LogEvent("Exception", "", "", "Window", ex);
                 return "";
             }
-            
+
         }
 
         private string GetWindowName()
@@ -529,7 +536,7 @@ namespace zVirtualDesktop
                 Log.LogEvent("Exception", "", "", "Window", ex);
                 return "";
             }
-            
+
         }
 
         private uint GetProcessID()
@@ -539,12 +546,13 @@ namespace zVirtualDesktop
                 uint lpdwProcessId;
                 GetWindowThreadProcessId(hWnd, out lpdwProcessId);
                 return lpdwProcessId;
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 Log.LogEvent("Exception", "", "", "Window", ex);
                 return 0;
             }
-            
+
         }
 
         private int GetDesktopNumber(Guid Guid)
@@ -572,9 +580,41 @@ namespace zVirtualDesktop
 
         }
 
+        public static void FindWindowMatch(string titleMatch)
+        {
+            TitleMatch = titleMatch;
+            EnumWindows(new CallBack(EnumWindowCallBack), 0);
+        }
+
+        private static bool EnumWindowCallBack(int hwnd, int lParam)
+        {
+
+            StringBuilder sb = new StringBuilder(1024);
+            StringBuilder sbc = new StringBuilder(256);
+            GetClassName((IntPtr)hwnd, sbc, sbc.Capacity);
+            GetWindowText((IntPtr)hwnd, sb, sb.Capacity);
+
+            Debug.WriteLine("{0} - {1} - {2}", hwnd, sbc, sb);
+            if (sbc.Length > 0)
+            {
+                if (sbc.ToString().Contains(TitleMatch) || sb.ToString().Contains(TitleMatch))
+                {
+                    FoundWindowHandle = (IntPtr)hwnd;
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public static IntPtr FoundWindowHandle = (IntPtr) 0;
+        public static string TitleMatch;
+
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
         public static extern IntPtr FindWindow(string lpClassName, string lpWindowName);
 
+        [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
+        public static extern int EnumWindows(CallBack x, int y);
+        public delegate bool CallBack(int hwnd, int lParam);
         [DllImport("user32.dll", SetLastError = true, CharSet = CharSet.Auto)]
         public static extern IntPtr FindWindowEx(IntPtr parentHandle, IntPtr childAfter, string lclassName, string windowTitle);
 
