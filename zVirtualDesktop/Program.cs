@@ -19,9 +19,9 @@ namespace zVirtualDesktop
         static void Main(string[] args)
         {
 
-            if(args.Length > 1)
+            if (args.Length > 1)
             {
-                if(args[0] == "intptr")
+                if (args[0] == "intptr")
                 {
                     Window win = new Window((IntPtr)Convert.ToInt32(args[1]));
                     win.MoveToDesktop(Convert.ToInt32(args[2]));
@@ -40,20 +40,24 @@ namespace zVirtualDesktop
                 }
 
                 Console.WriteLine("Found Handle: {0}", Window.FoundWindowHandle);
+
                 return;
             }
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+            else
+            {
+                Application.EnableVisualStyles();
+                Application.SetCompatibleTextRenderingDefault(false);
 
-            //CheckVersion();
+                //CheckVersion();
 
-            //Add Excluded windows
-            ExcludedWindowCaptions.Add("ASUS_Check");
-            ExcludedWindowCaptions.Add("NVIDIA GeForce Overlay");
-            ExcludedWindowCaptions.Add("zVirtualDesktop Settings");
+                //Add Excluded windows
+                ExcludedWindowCaptions.Add("ASUS_Check");
+                ExcludedWindowCaptions.Add("NVIDIA GeForce Overlay");
+                ExcludedWindowCaptions.Add("zVirtualDesktop Settings");
 
-            //Run the main form
-            Application.Run(MainForm = new frmMain());
+                //Run the main form
+                Application.Run(MainForm = new frmMain());
+            }
 
         }
 

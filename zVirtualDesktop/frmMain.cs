@@ -20,7 +20,7 @@ namespace zVirtualDesktop
     public partial class frmMain : Form
     { 
         private bool ExitClicked = false;
-        public Timer timerCheckVersion = new Timer();
+        // public Timer timerCheckVersion = new Timer();
 
         public frmMain()
         {
@@ -103,9 +103,9 @@ namespace zVirtualDesktop
                 //{
                 //    VirtualDesktop.Create();
                 //}
-                timerCheckVersion.Tick += timerCheckVersion_Tick;
-                timerCheckVersion.Interval = 600000; //10 minutes
-                timerCheckVersion.Start();
+                //timerCheckVersion.Tick += timerCheckVersion_Tick;
+                //timerCheckVersion.Interval = 600000; //10 minutes
+                //timerCheckVersion.Start();
 
             }
             catch (Exception ex)
